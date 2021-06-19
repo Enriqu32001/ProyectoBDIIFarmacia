@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="Data Source=farmacia-database.southcentralus.cloudapp.azure.com;initial catalog=Farmacia;persist security info=True;user id=sa;password=AdminFarmacia123;MultipleActiveResultSets=True" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\ByKitsuneXD\\Documents\\Proyect\ Visual\\ProyectoBDIIFarmacia\\FarmciaApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\ByKitsuneXD\\Documents\\Proyect\ Visual\\Enriqu32001\\ProyectoBDIIFarmacia\\FarmciaApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
   </parameter>
   <parameter name="FarmaciaEntities-Web.config Connection String" description="FarmaciaEntities Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="metadata=res://*/Models.BD-Farmacia.csdl|res://*/Models.BD-Farmacia.ssdl|res://*/Models.BD-Farmacia.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=farmacia-database.southcentralus.cloudapp.azure.com;initial catalog=Farmacia;persist security info=True;user id=sa;password=AdminFarmacia123;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\ByKitsuneXD\\Documents\\Proyect\ Visual\\ProyectoBDIIFarmacia\\FarmciaApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='FarmaciaEntities']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\ByKitsuneXD\\Documents\\Proyect\ Visual\\Enriqu32001\\ProyectoBDIIFarmacia\\FarmciaApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='FarmaciaEntities']/@connectionString" />
   </parameter>
 </parameters>
