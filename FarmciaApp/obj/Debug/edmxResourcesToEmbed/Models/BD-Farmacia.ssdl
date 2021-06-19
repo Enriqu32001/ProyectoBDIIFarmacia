@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FarmaciaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="MEDICAMENTO">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="precio" Type="float" Nullable="false" />
+    <Property Name="presentacion" Type="int" Nullable="false" />
+    <Property Name="tipoMedicamento" Type="int" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="indicaciones" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="tipoFarmaco" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRESENTACION">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nombrePresentacion" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TIPOESPECIFICO">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nombreTipEsp" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TIPOFARMACO">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nombreTipoFar" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TIPOMEDICAMENTO">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nombreTipo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="tipoEspecifico" Type="int" Nullable="false" />
+    <Property Name="unidadMedida" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UNIDADMEDIDA">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nombreUnidad" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TIPOSUSUARIOS">
+    <Key>
+      <PropertyRef Name="tipoUsuarioID" />
+    </Key>
+    <Property Name="tipoUsuarioID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tipoUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USUARIOS">
+    <Key>
+      <PropertyRef Name="usuarioID" />
+    </Key>
+    <Property Name="usuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="primerNombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="primerApellido" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nombreUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="contraseña" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="tipoUsuario" Type="smallint" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_Presentacion">
+    <End Role="PRESENTACION" Type="Self.PRESENTACION" Multiplicity="1" />
+    <End Role="MEDICAMENTO" Type="Self.MEDICAMENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRESENTACION">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="MEDICAMENTO">
+        <PropertyRef Name="presentacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_TipoEspecifico">
+    <End Role="TIPOESPECIFICO" Type="Self.TIPOESPECIFICO" Multiplicity="1" />
+    <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOESPECIFICO">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TIPOMEDICAMENTO">
+        <PropertyRef Name="tipoEspecifico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tipoFarmaco">
+    <End Role="TIPOFARMACO" Type="Self.TIPOFARMACO" Multiplicity="1" />
+    <End Role="MEDICAMENTO" Type="Self.MEDICAMENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOFARMACO">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="MEDICAMENTO">
+        <PropertyRef Name="tipoFarmaco" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_TipoMedicamento">
+    <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="1" />
+    <End Role="MEDICAMENTO" Type="Self.MEDICAMENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOMEDICAMENTO">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="MEDICAMENTO">
+        <PropertyRef Name="tipoMedicamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_TipoUsuario">
+    <End Role="TIPOSUSUARIOS" Type="Self.TIPOSUSUARIOS" Multiplicity="1" />
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOSUSUARIOS">
+        <PropertyRef Name="tipoUsuarioID" />
+      </Principal>
+      <Dependent Role="USUARIOS">
+        <PropertyRef Name="tipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_UnidadMedida">
+    <End Role="UNIDADMEDIDA" Type="Self.UNIDADMEDIDA" Multiplicity="1" />
+    <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UNIDADMEDIDA">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TIPOMEDICAMENTO">
+        <PropertyRef Name="unidadMedida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ObtenerTablaUsuariovalido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user" Type="varchar" Mode="In" />
+    <Parameter Name="pass" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="FarmaciaModelStoreContainer">
+    <EntitySet Name="MEDICAMENTO" EntityType="Self.MEDICAMENTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRESENTACION" EntityType="Self.PRESENTACION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TIPOESPECIFICO" EntityType="Self.TIPOESPECIFICO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TIPOFARMACO" EntityType="Self.TIPOFARMACO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TIPOMEDICAMENTO" EntityType="Self.TIPOMEDICAMENTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UNIDADMEDIDA" EntityType="Self.UNIDADMEDIDA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TIPOSUSUARIOS" EntityType="Self.TIPOSUSUARIOS" Schema="Usuario" store:Type="Tables" />
+    <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="Usuario" store:Type="Tables" />
+    <AssociationSet Name="fk_Presentacion" Association="Self.fk_Presentacion">
+      <End Role="PRESENTACION" EntitySet="PRESENTACION" />
+      <End Role="MEDICAMENTO" EntitySet="MEDICAMENTO" />
+    </AssociationSet>
+    <AssociationSet Name="fk_TipoEspecifico" Association="Self.fk_TipoEspecifico">
+      <End Role="TIPOESPECIFICO" EntitySet="TIPOESPECIFICO" />
+      <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTO" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tipoFarmaco" Association="Self.fk_tipoFarmaco">
+      <End Role="TIPOFARMACO" EntitySet="TIPOFARMACO" />
+      <End Role="MEDICAMENTO" EntitySet="MEDICAMENTO" />
+    </AssociationSet>
+    <AssociationSet Name="fk_TipoMedicamento" Association="Self.fk_TipoMedicamento">
+      <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTO" />
+      <End Role="MEDICAMENTO" EntitySet="MEDICAMENTO" />
+    </AssociationSet>
+    <AssociationSet Name="fk_TipoUsuario" Association="Self.fk_TipoUsuario">
+      <End Role="TIPOSUSUARIOS" EntitySet="TIPOSUSUARIOS" />
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+    </AssociationSet>
+    <AssociationSet Name="fk_UnidadMedida" Association="Self.fk_UnidadMedida">
+      <End Role="UNIDADMEDIDA" EntitySet="UNIDADMEDIDA" />
+      <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

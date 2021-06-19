@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FarmaciaModelStoreContainer" CdmEntityContainer="FarmaciaEntities">
+    <EntitySetMapping Name="MEDICAMENTOes">
+      <EntityTypeMapping TypeName="FarmaciaModel.MEDICAMENTO">
+        <MappingFragment StoreEntitySet="MEDICAMENTO">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="presentacion" ColumnName="presentacion" />
+          <ScalarProperty Name="tipoMedicamento" ColumnName="tipoMedicamento" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="indicaciones" ColumnName="indicaciones" />
+          <ScalarProperty Name="tipoFarmaco" ColumnName="tipoFarmaco" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRESENTACIONs">
+      <EntityTypeMapping TypeName="FarmaciaModel.PRESENTACION">
+        <MappingFragment StoreEntitySet="PRESENTACION">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombrePresentacion" ColumnName="nombrePresentacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOESPECIFICOes">
+      <EntityTypeMapping TypeName="FarmaciaModel.TIPOESPECIFICO">
+        <MappingFragment StoreEntitySet="TIPOESPECIFICO">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombreTipEsp" ColumnName="nombreTipEsp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOFARMACOes">
+      <EntityTypeMapping TypeName="FarmaciaModel.TIPOFARMACO">
+        <MappingFragment StoreEntitySet="TIPOFARMACO">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombreTipoFar" ColumnName="nombreTipoFar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOMEDICAMENTOes">
+      <EntityTypeMapping TypeName="FarmaciaModel.TIPOMEDICAMENTO">
+        <MappingFragment StoreEntitySet="TIPOMEDICAMENTO">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombreTipo" ColumnName="nombreTipo" />
+          <ScalarProperty Name="tipoEspecifico" ColumnName="tipoEspecifico" />
+          <ScalarProperty Name="unidadMedida" ColumnName="unidadMedida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UNIDADMEDIDAs">
+      <EntityTypeMapping TypeName="FarmaciaModel.UNIDADMEDIDA">
+        <MappingFragment StoreEntitySet="UNIDADMEDIDA">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombreUnidad" ColumnName="nombreUnidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOSUSUARIOS">
+      <EntityTypeMapping TypeName="FarmaciaModel.TIPOSUSUARIO">
+        <MappingFragment StoreEntitySet="TIPOSUSUARIOS">
+          <ScalarProperty Name="tipoUsuarioID" ColumnName="tipoUsuarioID" />
+          <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIOS">
+      <EntityTypeMapping TypeName="FarmaciaModel.USUARIO">
+        <MappingFragment StoreEntitySet="USUARIOS">
+          <ScalarProperty Name="usuarioID" ColumnName="usuarioID" />
+          <ScalarProperty Name="primerNombre" ColumnName="primerNombre" />
+          <ScalarProperty Name="primerApellido" ColumnName="primerApellido" />
+          <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+          <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+          <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ObtenerTablaUsuariovalido" FunctionName="FarmaciaModel.Store.ObtenerTablaUsuariovalido">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FarmaciaModel.ObtenerTablaUsuariovalido_Result">
+          <ScalarProperty Name="usuarioID" ColumnName="usuarioID" />
+          <ScalarProperty Name="primerNombre" ColumnName="primerNombre" />
+          <ScalarProperty Name="primerApellido" ColumnName="primerApellido" />
+          <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

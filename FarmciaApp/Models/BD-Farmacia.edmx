@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FarmaciaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MEDICAMENTO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="precio" Type="float" Nullable="false" />
+          <Property Name="presentacion" Type="int" Nullable="false" />
+          <Property Name="tipoMedicamento" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="indicaciones" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="tipoFarmaco" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESENTACION">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombrePresentacion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPOESPECIFICO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombreTipEsp" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPOFARMACO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombreTipoFar" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPOMEDICAMENTO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombreTipo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tipoEspecifico" Type="int" Nullable="false" />
+          <Property Name="unidadMedida" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UNIDADMEDIDA">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombreUnidad" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPOSUSUARIOS">
+          <Key>
+            <PropertyRef Name="tipoUsuarioID" />
+          </Key>
+          <Property Name="tipoUsuarioID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipoUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="usuarioID" />
+          </Key>
+          <Property Name="usuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="primerNombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="primerApellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombreUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contraseña" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tipoUsuario" Type="smallint" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Presentacion">
+          <End Role="PRESENTACION" Type="Self.PRESENTACION" Multiplicity="1" />
+          <End Role="MEDICAMENTO" Type="Self.MEDICAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESENTACION">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MEDICAMENTO">
+              <PropertyRef Name="presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TipoEspecifico">
+          <End Role="TIPOESPECIFICO" Type="Self.TIPOESPECIFICO" Multiplicity="1" />
+          <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOESPECIFICO">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TIPOMEDICAMENTO">
+              <PropertyRef Name="tipoEspecifico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tipoFarmaco">
+          <End Role="TIPOFARMACO" Type="Self.TIPOFARMACO" Multiplicity="1" />
+          <End Role="MEDICAMENTO" Type="Self.MEDICAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOFARMACO">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MEDICAMENTO">
+              <PropertyRef Name="tipoFarmaco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TipoMedicamento">
+          <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="1" />
+          <End Role="MEDICAMENTO" Type="Self.MEDICAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOMEDICAMENTO">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MEDICAMENTO">
+              <PropertyRef Name="tipoMedicamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TipoUsuario">
+          <End Role="TIPOSUSUARIOS" Type="Self.TIPOSUSUARIOS" Multiplicity="1" />
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOSUSUARIOS">
+              <PropertyRef Name="tipoUsuarioID" />
+            </Principal>
+            <Dependent Role="USUARIOS">
+              <PropertyRef Name="tipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UnidadMedida">
+          <End Role="UNIDADMEDIDA" Type="Self.UNIDADMEDIDA" Multiplicity="1" />
+          <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDADMEDIDA">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TIPOMEDICAMENTO">
+              <PropertyRef Name="unidadMedida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ObtenerTablaUsuariovalido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="varchar" Mode="In" />
+          <Parameter Name="pass" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="FarmaciaModelStoreContainer">
+          <EntitySet Name="MEDICAMENTO" EntityType="Self.MEDICAMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRESENTACION" EntityType="Self.PRESENTACION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOESPECIFICO" EntityType="Self.TIPOESPECIFICO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOFARMACO" EntityType="Self.TIPOFARMACO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOMEDICAMENTO" EntityType="Self.TIPOMEDICAMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UNIDADMEDIDA" EntityType="Self.UNIDADMEDIDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOSUSUARIOS" EntityType="Self.TIPOSUSUARIOS" Schema="Usuario" store:Type="Tables" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="Usuario" store:Type="Tables" />
+          <AssociationSet Name="fk_Presentacion" Association="Self.fk_Presentacion">
+            <End Role="PRESENTACION" EntitySet="PRESENTACION" />
+            <End Role="MEDICAMENTO" EntitySet="MEDICAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TipoEspecifico" Association="Self.fk_TipoEspecifico">
+            <End Role="TIPOESPECIFICO" EntitySet="TIPOESPECIFICO" />
+            <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tipoFarmaco" Association="Self.fk_tipoFarmaco">
+            <End Role="TIPOFARMACO" EntitySet="TIPOFARMACO" />
+            <End Role="MEDICAMENTO" EntitySet="MEDICAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TipoMedicamento" Association="Self.fk_TipoMedicamento">
+            <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTO" />
+            <End Role="MEDICAMENTO" EntitySet="MEDICAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TipoUsuario" Association="Self.fk_TipoUsuario">
+            <End Role="TIPOSUSUARIOS" EntitySet="TIPOSUSUARIOS" />
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UnidadMedida" Association="Self.fk_UnidadMedida">
+            <End Role="UNIDADMEDIDA" EntitySet="UNIDADMEDIDA" />
+            <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FarmaciaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MEDICAMENTO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precio" Type="Double" Nullable="false" />
+          <Property Name="presentacion" Type="Int32" Nullable="false" />
+          <Property Name="tipoMedicamento" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="indicaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoFarmaco" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PRESENTACION1" Relationship="Self.fk_Presentacion" FromRole="MEDICAMENTO" ToRole="PRESENTACION" />
+          <NavigationProperty Name="TIPOFARMACO1" Relationship="Self.fk_tipoFarmaco" FromRole="MEDICAMENTO" ToRole="TIPOFARMACO" />
+          <NavigationProperty Name="TIPOMEDICAMENTO1" Relationship="Self.fk_TipoMedicamento" FromRole="MEDICAMENTO" ToRole="TIPOMEDICAMENTO" />
+        </EntityType>
+        <EntityType Name="PRESENTACION">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombrePresentacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MEDICAMENTOes" Relationship="Self.fk_Presentacion" FromRole="PRESENTACION" ToRole="MEDICAMENTO" />
+        </EntityType>
+        <EntityType Name="TIPOESPECIFICO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombreTipEsp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TIPOMEDICAMENTOes" Relationship="Self.fk_TipoEspecifico" FromRole="TIPOESPECIFICO" ToRole="TIPOMEDICAMENTO" />
+        </EntityType>
+        <EntityType Name="TIPOFARMACO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombreTipoFar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MEDICAMENTOes" Relationship="Self.fk_tipoFarmaco" FromRole="TIPOFARMACO" ToRole="MEDICAMENTO" />
+        </EntityType>
+        <EntityType Name="TIPOMEDICAMENTO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombreTipo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoEspecifico" Type="Int32" Nullable="false" />
+          <Property Name="unidadMedida" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MEDICAMENTOes" Relationship="Self.fk_TipoMedicamento" FromRole="TIPOMEDICAMENTO" ToRole="MEDICAMENTO" />
+          <NavigationProperty Name="TIPOESPECIFICO1" Relationship="Self.fk_TipoEspecifico" FromRole="TIPOMEDICAMENTO" ToRole="TIPOESPECIFICO" />
+          <NavigationProperty Name="UNIDADMEDIDA1" Relationship="Self.fk_UnidadMedida" FromRole="TIPOMEDICAMENTO" ToRole="UNIDADMEDIDA" />
+        </EntityType>
+        <EntityType Name="UNIDADMEDIDA">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombreUnidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TIPOMEDICAMENTOes" Relationship="Self.fk_UnidadMedida" FromRole="UNIDADMEDIDA" ToRole="TIPOMEDICAMENTO" />
+        </EntityType>
+        <EntityType Name="TIPOSUSUARIO">
+          <Key>
+            <PropertyRef Name="tipoUsuarioID" />
+          </Key>
+          <Property Name="tipoUsuarioID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIOS" Relationship="Self.fk_TipoUsuario" FromRole="TIPOSUSUARIOS" ToRole="USUARIOS" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="usuarioID" />
+          </Key>
+          <Property Name="usuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="primerNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="primerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoUsuario" Type="Int16" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TIPOSUSUARIO" Relationship="Self.fk_TipoUsuario" FromRole="USUARIOS" ToRole="TIPOSUSUARIOS" />
+        </EntityType>
+        <Association Name="fk_Presentacion">
+          <End Role="PRESENTACION" Type="Self.PRESENTACION" Multiplicity="1" />
+          <End Role="MEDICAMENTO" Type="Self.MEDICAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESENTACION">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MEDICAMENTO">
+              <PropertyRef Name="presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tipoFarmaco">
+          <End Role="TIPOFARMACO" Type="Self.TIPOFARMACO" Multiplicity="1" />
+          <End Role="MEDICAMENTO" Type="Self.MEDICAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOFARMACO">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MEDICAMENTO">
+              <PropertyRef Name="tipoFarmaco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TipoMedicamento">
+          <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="1" />
+          <End Role="MEDICAMENTO" Type="Self.MEDICAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOMEDICAMENTO">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MEDICAMENTO">
+              <PropertyRef Name="tipoMedicamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TipoEspecifico">
+          <End Role="TIPOESPECIFICO" Type="Self.TIPOESPECIFICO" Multiplicity="1" />
+          <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOESPECIFICO">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TIPOMEDICAMENTO">
+              <PropertyRef Name="tipoEspecifico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UnidadMedida">
+          <End Role="UNIDADMEDIDA" Type="Self.UNIDADMEDIDA" Multiplicity="1" />
+          <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDADMEDIDA">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TIPOMEDICAMENTO">
+              <PropertyRef Name="unidadMedida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TipoUsuario">
+          <End Role="TIPOSUSUARIOS" Type="Self.TIPOSUSUARIO" Multiplicity="1" />
+          <End Role="USUARIOS" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOSUSUARIOS">
+              <PropertyRef Name="tipoUsuarioID" />
+            </Principal>
+            <Dependent Role="USUARIOS">
+              <PropertyRef Name="tipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FarmaciaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MEDICAMENTOes" EntityType="Self.MEDICAMENTO" />
+          <EntitySet Name="PRESENTACIONs" EntityType="Self.PRESENTACION" />
+          <EntitySet Name="TIPOESPECIFICOes" EntityType="Self.TIPOESPECIFICO" />
+          <EntitySet Name="TIPOFARMACOes" EntityType="Self.TIPOFARMACO" />
+          <EntitySet Name="TIPOMEDICAMENTOes" EntityType="Self.TIPOMEDICAMENTO" />
+          <EntitySet Name="UNIDADMEDIDAs" EntityType="Self.UNIDADMEDIDA" />
+          <EntitySet Name="TIPOSUSUARIOS" EntityType="Self.TIPOSUSUARIO" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIO" />
+          <AssociationSet Name="fk_Presentacion" Association="Self.fk_Presentacion">
+            <End Role="PRESENTACION" EntitySet="PRESENTACIONs" />
+            <End Role="MEDICAMENTO" EntitySet="MEDICAMENTOes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tipoFarmaco" Association="Self.fk_tipoFarmaco">
+            <End Role="TIPOFARMACO" EntitySet="TIPOFARMACOes" />
+            <End Role="MEDICAMENTO" EntitySet="MEDICAMENTOes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TipoMedicamento" Association="Self.fk_TipoMedicamento">
+            <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTOes" />
+            <End Role="MEDICAMENTO" EntitySet="MEDICAMENTOes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TipoEspecifico" Association="Self.fk_TipoEspecifico">
+            <End Role="TIPOESPECIFICO" EntitySet="TIPOESPECIFICOes" />
+            <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTOes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UnidadMedida" Association="Self.fk_UnidadMedida">
+            <End Role="UNIDADMEDIDA" EntitySet="UNIDADMEDIDAs" />
+            <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTOes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TipoUsuario" Association="Self.fk_TipoUsuario">
+            <End Role="TIPOSUSUARIOS" EntitySet="TIPOSUSUARIOS" />
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+          </AssociationSet>
+          <FunctionImport Name="ObtenerTablaUsuariovalido" ReturnType="Collection(FarmaciaModel.ObtenerTablaUsuariovalido_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ObtenerTablaUsuariovalido_Result">
+          <Property Type="Int32" Name="usuarioID" Nullable="false" />
+          <Property Type="String" Name="primerNombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="primerApellido" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tipoUsuario" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FarmaciaModelStoreContainer" CdmEntityContainer="FarmaciaEntities">
+          <EntitySetMapping Name="MEDICAMENTOes">
+            <EntityTypeMapping TypeName="FarmaciaModel.MEDICAMENTO">
+              <MappingFragment StoreEntitySet="MEDICAMENTO">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="presentacion" ColumnName="presentacion" />
+                <ScalarProperty Name="tipoMedicamento" ColumnName="tipoMedicamento" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="indicaciones" ColumnName="indicaciones" />
+                <ScalarProperty Name="tipoFarmaco" ColumnName="tipoFarmaco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESENTACIONs">
+            <EntityTypeMapping TypeName="FarmaciaModel.PRESENTACION">
+              <MappingFragment StoreEntitySet="PRESENTACION">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombrePresentacion" ColumnName="nombrePresentacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOESPECIFICOes">
+            <EntityTypeMapping TypeName="FarmaciaModel.TIPOESPECIFICO">
+              <MappingFragment StoreEntitySet="TIPOESPECIFICO">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombreTipEsp" ColumnName="nombreTipEsp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOFARMACOes">
+            <EntityTypeMapping TypeName="FarmaciaModel.TIPOFARMACO">
+              <MappingFragment StoreEntitySet="TIPOFARMACO">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombreTipoFar" ColumnName="nombreTipoFar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOMEDICAMENTOes">
+            <EntityTypeMapping TypeName="FarmaciaModel.TIPOMEDICAMENTO">
+              <MappingFragment StoreEntitySet="TIPOMEDICAMENTO">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombreTipo" ColumnName="nombreTipo" />
+                <ScalarProperty Name="tipoEspecifico" ColumnName="tipoEspecifico" />
+                <ScalarProperty Name="unidadMedida" ColumnName="unidadMedida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UNIDADMEDIDAs">
+            <EntityTypeMapping TypeName="FarmaciaModel.UNIDADMEDIDA">
+              <MappingFragment StoreEntitySet="UNIDADMEDIDA">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombreUnidad" ColumnName="nombreUnidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOSUSUARIOS">
+            <EntityTypeMapping TypeName="FarmaciaModel.TIPOSUSUARIO">
+              <MappingFragment StoreEntitySet="TIPOSUSUARIOS">
+                <ScalarProperty Name="tipoUsuarioID" ColumnName="tipoUsuarioID" />
+                <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS">
+            <EntityTypeMapping TypeName="FarmaciaModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="usuarioID" ColumnName="usuarioID" />
+                <ScalarProperty Name="primerNombre" ColumnName="primerNombre" />
+                <ScalarProperty Name="primerApellido" ColumnName="primerApellido" />
+                <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ObtenerTablaUsuariovalido" FunctionName="FarmaciaModel.Store.ObtenerTablaUsuariovalido">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FarmaciaModel.ObtenerTablaUsuariovalido_Result">
+                <ScalarProperty Name="usuarioID" ColumnName="usuarioID" />
+                <ScalarProperty Name="primerNombre" ColumnName="primerNombre" />
+                <ScalarProperty Name="primerApellido" ColumnName="primerApellido" />
+                <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
