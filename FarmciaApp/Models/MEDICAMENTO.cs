@@ -22,9 +22,12 @@ namespace FarmciaApp.Models
         public int cantidad { get; set; }
         public string indicaciones { get; set; }
         public int tipoFarmaco { get; set; }
+        public int tipoEspecifico { get; set; }
+        public int existencia { get; set; }
     
         public virtual PRESENTACION PRESENTACION1 { get; set; }
         public virtual TIPOFARMACO TIPOFARMACO1 { get; set; }
         public virtual TIPOMEDICAMENTO TIPOMEDICAMENTO1 { get; set; }
+        public virtual TIPOESPECIFICO TIPOESPECIFICO1 { get; set; }
     }
 }

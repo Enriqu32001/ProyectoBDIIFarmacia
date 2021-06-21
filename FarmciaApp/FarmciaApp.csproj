@@ -172,6 +172,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MEDICAMENTOesController.cs" />
     <Compile Include="Controllers\USUARIOsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -201,6 +202,9 @@
       <DependentUpon>BD-Farmacia.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PRESENTACION.cs">
+      <DependentUpon>BD-Farmacia.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_Medicamentos_Result.cs">
       <DependentUpon>BD-Farmacia.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TIPOESPECIFICO.cs">
@@ -303,6 +307,11 @@
     <Content Include="Views\USUARIOs\Details.cshtml" />
     <Content Include="Views\USUARIOs\Edit.cshtml" />
     <Content Include="Views\USUARIOs\Index.cshtml" />
+    <Content Include="Views\MEDICAMENTOes\Create.cshtml" />
+    <Content Include="Views\MEDICAMENTOes\Delete.cshtml" />
+    <Content Include="Views\MEDICAMENTOes\Details.cshtml" />
+    <Content Include="Views\MEDICAMENTOes\Edit.cshtml" />
+    <Content Include="Views\MEDICAMENTOes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

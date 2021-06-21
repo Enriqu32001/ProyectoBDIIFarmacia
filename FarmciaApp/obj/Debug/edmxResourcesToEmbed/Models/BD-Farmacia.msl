@@ -4,6 +4,8 @@
     <EntitySetMapping Name="MEDICAMENTOes">
       <EntityTypeMapping TypeName="FarmaciaModel.MEDICAMENTO">
         <MappingFragment StoreEntitySet="MEDICAMENTO">
+          <ScalarProperty Name="existencia" ColumnName="existencia" />
+          <ScalarProperty Name="tipoEspecifico" ColumnName="tipoEspecifico" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="precio" ColumnName="precio" />
@@ -44,7 +46,6 @@
         <MappingFragment StoreEntitySet="TIPOMEDICAMENTO">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombreTipo" ColumnName="nombreTipo" />
-          <ScalarProperty Name="tipoEspecifico" ColumnName="tipoEspecifico" />
           <ScalarProperty Name="unidadMedida" ColumnName="unidadMedida" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -86,6 +87,24 @@
           <ScalarProperty Name="primerApellido" ColumnName="primerApellido" />
           <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
           <ScalarProperty Name="email" ColumnName="email" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="checkStocks" FunctionName="FarmaciaModel.Store.checkStocks" />
+    <FunctionImportMapping FunctionImportName="Proc_Medicamentos" FunctionName="FarmaciaModel.Store.Proc_Medicamentos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FarmaciaModel.Proc_Medicamentos_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Presentacion" ColumnName="Presentacion" />
+          <ScalarProperty Name="Tipo_Medicamento" ColumnName="Tipo Medicamento" />
+          <ScalarProperty Name="Tipo_Especifico" ColumnName="Tipo Especifico" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Unidad_Medida" ColumnName="Unidad Medida" />
+          <ScalarProperty Name="Indicaciones" ColumnName="Indicaciones" />
+          <ScalarProperty Name="Tipo_Farmaco" ColumnName="Tipo Farmaco" />
+          <ScalarProperty Name="Existencia" ColumnName="Existencia" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

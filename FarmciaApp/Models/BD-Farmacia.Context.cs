@@ -48,5 +48,15 @@ namespace FarmciaApp.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerTablaUsuariovalido_Result>("ObtenerTablaUsuariovalido", userParameter, passParameter);
         }
+    
+        public virtual int checkStocks()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("checkStocks");
+        }
+    
+        public virtual ObjectResult<Proc_Medicamentos_Result> Proc_Medicamentos()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Medicamentos_Result>("Proc_Medicamentos");
+        }
     }
 }

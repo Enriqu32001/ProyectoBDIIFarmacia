@@ -4,55 +4,56 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FarmaciaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FarmaciaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="MEDICAMENTO">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="precio" Type="float" Nullable="false" />
           <Property Name="presentacion" Type="int" Nullable="false" />
           <Property Name="tipoMedicamento" Type="int" Nullable="false" />
+          <Property Name="tipoEspecifico" Type="int" Nullable="false" />
           <Property Name="cantidad" Type="int" Nullable="false" />
           <Property Name="indicaciones" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="tipoFarmaco" Type="int" Nullable="false" />
+          <Property Name="existencia" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PRESENTACION">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombrePresentacion" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="TIPOESPECIFICO">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombreTipEsp" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="TIPOFARMACO">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombreTipoFar" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="TIPOMEDICAMENTO">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombreTipo" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="tipoEspecifico" Type="int" Nullable="false" />
           <Property Name="unidadMedida" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UNIDADMEDIDA">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombreUnidad" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="TIPOSUSUARIOS">
@@ -88,12 +89,12 @@
         </Association>
         <Association Name="fk_TipoEspecifico">
           <End Role="TIPOESPECIFICO" Type="Self.TIPOESPECIFICO" Multiplicity="1" />
-          <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="*" />
+          <End Role="MEDICAMENTO" Type="Self.MEDICAMENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TIPOESPECIFICO">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="TIPOMEDICAMENTO">
+            <Dependent Role="MEDICAMENTO">
               <PropertyRef Name="tipoEspecifico" />
             </Dependent>
           </ReferentialConstraint>
@@ -146,10 +147,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="checkStocks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ObtenerTablaUsuariovalido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="user" Type="varchar" Mode="In" />
           <Parameter Name="pass" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Proc_Medicamentos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="FarmaciaModelStoreContainer">
           <EntitySet Name="MEDICAMENTO" EntityType="Self.MEDICAMENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRESENTACION" EntityType="Self.PRESENTACION" Schema="dbo" store:Type="Tables" />
@@ -165,7 +168,7 @@
           </AssociationSet>
           <AssociationSet Name="fk_TipoEspecifico" Association="Self.fk_TipoEspecifico">
             <End Role="TIPOESPECIFICO" EntitySet="TIPOESPECIFICO" />
-            <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTO" />
+            <End Role="MEDICAMENTO" EntitySet="MEDICAMENTO" />
           </AssociationSet>
           <AssociationSet Name="fk_tipoFarmaco" Association="Self.fk_tipoFarmaco">
             <End Role="TIPOFARMACO" EntitySet="TIPOFARMACO" />
@@ -184,8 +187,7 @@
             <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FarmaciaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -204,6 +206,9 @@
           <NavigationProperty Name="PRESENTACION1" Relationship="Self.fk_Presentacion" FromRole="MEDICAMENTO" ToRole="PRESENTACION" />
           <NavigationProperty Name="TIPOFARMACO1" Relationship="Self.fk_tipoFarmaco" FromRole="MEDICAMENTO" ToRole="TIPOFARMACO" />
           <NavigationProperty Name="TIPOMEDICAMENTO1" Relationship="Self.fk_TipoMedicamento" FromRole="MEDICAMENTO" ToRole="TIPOMEDICAMENTO" />
+          <Property Name="tipoEspecifico" Type="Int32" Nullable="false" />
+          <Property Name="existencia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TIPOESPECIFICO1" Relationship="FarmaciaModel.fk_TipoEspecifico1" FromRole="MEDICAMENTO" ToRole="TIPOESPECIFICO" />
         </EntityType>
         <EntityType Name="PRESENTACION">
           <Key>
@@ -219,7 +224,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="nombreTipEsp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TIPOMEDICAMENTOes" Relationship="Self.fk_TipoEspecifico" FromRole="TIPOESPECIFICO" ToRole="TIPOMEDICAMENTO" />
+          <NavigationProperty Name="MEDICAMENTOes" Relationship="FarmaciaModel.fk_TipoEspecifico1" FromRole="TIPOESPECIFICO" ToRole="MEDICAMENTO" />
         </EntityType>
         <EntityType Name="TIPOFARMACO">
           <Key>
@@ -235,10 +240,8 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="nombreTipo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tipoEspecifico" Type="Int32" Nullable="false" />
           <Property Name="unidadMedida" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MEDICAMENTOes" Relationship="Self.fk_TipoMedicamento" FromRole="TIPOMEDICAMENTO" ToRole="MEDICAMENTO" />
-          <NavigationProperty Name="TIPOESPECIFICO1" Relationship="Self.fk_TipoEspecifico" FromRole="TIPOMEDICAMENTO" ToRole="TIPOESPECIFICO" />
           <NavigationProperty Name="UNIDADMEDIDA1" Relationship="Self.fk_UnidadMedida" FromRole="TIPOMEDICAMENTO" ToRole="UNIDADMEDIDA" />
         </EntityType>
         <EntityType Name="UNIDADMEDIDA">
@@ -306,18 +309,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_TipoEspecifico">
-          <End Role="TIPOESPECIFICO" Type="Self.TIPOESPECIFICO" Multiplicity="1" />
-          <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIPOESPECIFICO">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="TIPOMEDICAMENTO">
-              <PropertyRef Name="tipoEspecifico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_UnidadMedida">
           <End Role="UNIDADMEDIDA" Type="Self.UNIDADMEDIDA" Multiplicity="1" />
           <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="*" />
@@ -363,10 +354,6 @@
             <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTOes" />
             <End Role="MEDICAMENTO" EntitySet="MEDICAMENTOes" />
           </AssociationSet>
-          <AssociationSet Name="fk_TipoEspecifico" Association="Self.fk_TipoEspecifico">
-            <End Role="TIPOESPECIFICO" EntitySet="TIPOESPECIFICOes" />
-            <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTOes" />
-          </AssociationSet>
           <AssociationSet Name="fk_UnidadMedida" Association="Self.fk_UnidadMedida">
             <End Role="UNIDADMEDIDA" EntitySet="UNIDADMEDIDAs" />
             <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTOes" />
@@ -379,6 +366,12 @@
             <Parameter Name="user" Mode="In" Type="String" />
             <Parameter Name="pass" Mode="In" Type="String" />
           </FunctionImport>
+          <AssociationSet Name="fk_TipoEspecifico1" Association="FarmaciaModel.fk_TipoEspecifico1">
+            <End Role="TIPOESPECIFICO" EntitySet="TIPOESPECIFICOes" />
+            <End Role="MEDICAMENTO" EntitySet="MEDICAMENTOes" />
+          </AssociationSet>
+          <FunctionImport Name="checkStocks" />
+          <FunctionImport Name="Proc_Medicamentos" ReturnType="Collection(FarmaciaModel.Proc_Medicamentos_Result)" />
         </EntityContainer>
         <ComplexType Name="ObtenerTablaUsuariovalido_Result">
           <Property Type="Int32" Name="usuarioID" Nullable="false" />
@@ -386,6 +379,31 @@
           <Property Type="String" Name="primerApellido" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="tipoUsuario" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <Association Name="fk_TipoEspecifico1">
+          <End Type="FarmaciaModel.TIPOESPECIFICO" Role="TIPOESPECIFICO" Multiplicity="1" />
+          <End Type="FarmaciaModel.MEDICAMENTO" Role="MEDICAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOESPECIFICO">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MEDICAMENTO">
+              <PropertyRef Name="tipoEspecifico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Proc_Medicamentos_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Double" Name="Precio" Nullable="false" />
+          <Property Type="String" Name="Presentacion" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Tipo_Medicamento" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Tipo_Especifico" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="String" Name="Unidad_Medida" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Indicaciones" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Tipo_Farmaco" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Existencia" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -396,6 +414,8 @@
           <EntitySetMapping Name="MEDICAMENTOes">
             <EntityTypeMapping TypeName="FarmaciaModel.MEDICAMENTO">
               <MappingFragment StoreEntitySet="MEDICAMENTO">
+                <ScalarProperty Name="existencia" ColumnName="existencia" />
+                <ScalarProperty Name="tipoEspecifico" ColumnName="tipoEspecifico" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="precio" ColumnName="precio" />
@@ -436,7 +456,6 @@
               <MappingFragment StoreEntitySet="TIPOMEDICAMENTO">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombreTipo" ColumnName="nombreTipo" />
-                <ScalarProperty Name="tipoEspecifico" ColumnName="tipoEspecifico" />
                 <ScalarProperty Name="unidadMedida" ColumnName="unidadMedida" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -478,6 +497,24 @@
                 <ScalarProperty Name="primerApellido" ColumnName="primerApellido" />
                 <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
                 <ScalarProperty Name="email" ColumnName="email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="checkStocks" FunctionName="FarmaciaModel.Store.checkStocks" />
+          <FunctionImportMapping FunctionImportName="Proc_Medicamentos" FunctionName="FarmaciaModel.Store.Proc_Medicamentos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FarmaciaModel.Proc_Medicamentos_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Presentacion" ColumnName="Presentacion" />
+                <ScalarProperty Name="Tipo_Medicamento" ColumnName="Tipo Medicamento" />
+                <ScalarProperty Name="Tipo_Especifico" ColumnName="Tipo Especifico" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Unidad_Medida" ColumnName="Unidad Medida" />
+                <ScalarProperty Name="Indicaciones" ColumnName="Indicaciones" />
+                <ScalarProperty Name="Tipo_Farmaco" ColumnName="Tipo Farmaco" />
+                <ScalarProperty Name="Existencia" ColumnName="Existencia" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

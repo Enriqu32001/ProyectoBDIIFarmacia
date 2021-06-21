@@ -4,50 +4,51 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="precio" Type="float" Nullable="false" />
     <Property Name="presentacion" Type="int" Nullable="false" />
     <Property Name="tipoMedicamento" Type="int" Nullable="false" />
+    <Property Name="tipoEspecifico" Type="int" Nullable="false" />
     <Property Name="cantidad" Type="int" Nullable="false" />
     <Property Name="indicaciones" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="tipoFarmaco" Type="int" Nullable="false" />
+    <Property Name="existencia" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PRESENTACION">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombrePresentacion" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="TIPOESPECIFICO">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombreTipEsp" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="TIPOFARMACO">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombreTipoFar" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="TIPOMEDICAMENTO">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombreTipo" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="tipoEspecifico" Type="int" Nullable="false" />
     <Property Name="unidadMedida" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UNIDADMEDIDA">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombreUnidad" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="TIPOSUSUARIOS">
@@ -83,12 +84,12 @@
   </Association>
   <Association Name="fk_TipoEspecifico">
     <End Role="TIPOESPECIFICO" Type="Self.TIPOESPECIFICO" Multiplicity="1" />
-    <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="*" />
+    <End Role="MEDICAMENTO" Type="Self.MEDICAMENTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TIPOESPECIFICO">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="TIPOMEDICAMENTO">
+      <Dependent Role="MEDICAMENTO">
         <PropertyRef Name="tipoEspecifico" />
       </Dependent>
     </ReferentialConstraint>
@@ -141,10 +142,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="checkStocks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="ObtenerTablaUsuariovalido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="user" Type="varchar" Mode="In" />
     <Parameter Name="pass" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="Proc_Medicamentos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="FarmaciaModelStoreContainer">
     <EntitySet Name="MEDICAMENTO" EntityType="Self.MEDICAMENTO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PRESENTACION" EntityType="Self.PRESENTACION" Schema="dbo" store:Type="Tables" />
@@ -160,7 +163,7 @@
     </AssociationSet>
     <AssociationSet Name="fk_TipoEspecifico" Association="Self.fk_TipoEspecifico">
       <End Role="TIPOESPECIFICO" EntitySet="TIPOESPECIFICO" />
-      <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTO" />
+      <End Role="MEDICAMENTO" EntitySet="MEDICAMENTO" />
     </AssociationSet>
     <AssociationSet Name="fk_tipoFarmaco" Association="Self.fk_tipoFarmaco">
       <End Role="TIPOFARMACO" EntitySet="TIPOFARMACO" />

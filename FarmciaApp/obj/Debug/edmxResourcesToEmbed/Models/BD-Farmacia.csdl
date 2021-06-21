@@ -15,6 +15,9 @@
     <NavigationProperty Name="PRESENTACION1" Relationship="Self.fk_Presentacion" FromRole="MEDICAMENTO" ToRole="PRESENTACION" />
     <NavigationProperty Name="TIPOFARMACO1" Relationship="Self.fk_tipoFarmaco" FromRole="MEDICAMENTO" ToRole="TIPOFARMACO" />
     <NavigationProperty Name="TIPOMEDICAMENTO1" Relationship="Self.fk_TipoMedicamento" FromRole="MEDICAMENTO" ToRole="TIPOMEDICAMENTO" />
+    <Property Name="tipoEspecifico" Type="Int32" Nullable="false" />
+    <Property Name="existencia" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TIPOESPECIFICO1" Relationship="FarmaciaModel.fk_TipoEspecifico1" FromRole="MEDICAMENTO" ToRole="TIPOESPECIFICO" />
   </EntityType>
   <EntityType Name="PRESENTACION">
     <Key>
@@ -30,7 +33,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="nombreTipEsp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="TIPOMEDICAMENTOes" Relationship="Self.fk_TipoEspecifico" FromRole="TIPOESPECIFICO" ToRole="TIPOMEDICAMENTO" />
+    <NavigationProperty Name="MEDICAMENTOes" Relationship="FarmaciaModel.fk_TipoEspecifico1" FromRole="TIPOESPECIFICO" ToRole="MEDICAMENTO" />
   </EntityType>
   <EntityType Name="TIPOFARMACO">
     <Key>
@@ -46,10 +49,8 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="nombreTipo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="tipoEspecifico" Type="Int32" Nullable="false" />
     <Property Name="unidadMedida" Type="Int32" Nullable="false" />
     <NavigationProperty Name="MEDICAMENTOes" Relationship="Self.fk_TipoMedicamento" FromRole="TIPOMEDICAMENTO" ToRole="MEDICAMENTO" />
-    <NavigationProperty Name="TIPOESPECIFICO1" Relationship="Self.fk_TipoEspecifico" FromRole="TIPOMEDICAMENTO" ToRole="TIPOESPECIFICO" />
     <NavigationProperty Name="UNIDADMEDIDA1" Relationship="Self.fk_UnidadMedida" FromRole="TIPOMEDICAMENTO" ToRole="UNIDADMEDIDA" />
   </EntityType>
   <EntityType Name="UNIDADMEDIDA">
@@ -117,18 +118,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_TipoEspecifico">
-    <End Role="TIPOESPECIFICO" Type="Self.TIPOESPECIFICO" Multiplicity="1" />
-    <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TIPOESPECIFICO">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="TIPOMEDICAMENTO">
-        <PropertyRef Name="tipoEspecifico" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="fk_UnidadMedida">
     <End Role="UNIDADMEDIDA" Type="Self.UNIDADMEDIDA" Multiplicity="1" />
     <End Role="TIPOMEDICAMENTO" Type="Self.TIPOMEDICAMENTO" Multiplicity="*" />
@@ -174,10 +163,6 @@
       <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTOes" />
       <End Role="MEDICAMENTO" EntitySet="MEDICAMENTOes" />
     </AssociationSet>
-    <AssociationSet Name="fk_TipoEspecifico" Association="Self.fk_TipoEspecifico">
-      <End Role="TIPOESPECIFICO" EntitySet="TIPOESPECIFICOes" />
-      <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTOes" />
-    </AssociationSet>
     <AssociationSet Name="fk_UnidadMedida" Association="Self.fk_UnidadMedida">
       <End Role="UNIDADMEDIDA" EntitySet="UNIDADMEDIDAs" />
       <End Role="TIPOMEDICAMENTO" EntitySet="TIPOMEDICAMENTOes" />
@@ -190,6 +175,12 @@
       <Parameter Name="user" Mode="In" Type="String" />
       <Parameter Name="pass" Mode="In" Type="String" />
     </FunctionImport>
+    <AssociationSet Name="fk_TipoEspecifico1" Association="FarmaciaModel.fk_TipoEspecifico1">
+      <End Role="TIPOESPECIFICO" EntitySet="TIPOESPECIFICOes" />
+      <End Role="MEDICAMENTO" EntitySet="MEDICAMENTOes" />
+    </AssociationSet>
+    <FunctionImport Name="checkStocks" />
+    <FunctionImport Name="Proc_Medicamentos" ReturnType="Collection(FarmaciaModel.Proc_Medicamentos_Result)" />
   </EntityContainer>
   <ComplexType Name="ObtenerTablaUsuariovalido_Result">
     <Property Type="Int32" Name="usuarioID" Nullable="false" />
@@ -197,5 +188,30 @@
     <Property Type="String" Name="primerApellido" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="tipoUsuario" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <Association Name="fk_TipoEspecifico1">
+    <End Type="FarmaciaModel.TIPOESPECIFICO" Role="TIPOESPECIFICO" Multiplicity="1" />
+    <End Type="FarmaciaModel.MEDICAMENTO" Role="MEDICAMENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOESPECIFICO">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="MEDICAMENTO">
+        <PropertyRef Name="tipoEspecifico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="Proc_Medicamentos_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+    <Property Type="Double" Name="Precio" Nullable="false" />
+    <Property Type="String" Name="Presentacion" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Tipo_Medicamento" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Tipo_Especifico" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Cantidad" Nullable="false" />
+    <Property Type="String" Name="Unidad_Medida" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Indicaciones" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Tipo_Farmaco" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Existencia" Nullable="false" />
   </ComplexType>
 </Schema>

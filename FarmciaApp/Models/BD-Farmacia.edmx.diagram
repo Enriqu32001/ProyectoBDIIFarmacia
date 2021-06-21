@@ -4,21 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="af0728e462f24086b093430a63ae222e" Name="Diagram1">
-        <EntityTypeShape EntityType="FarmaciaModel.MEDICAMENTO" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="FarmaciaModel.PRESENTACION" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FarmaciaModel.TIPOESPECIFICO" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FarmaciaModel.TIPOFARMACO" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FarmaciaModel.TIPOMEDICAMENTO" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FarmaciaModel.UNIDADMEDIDA" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FarmaciaModel.TIPOSUSUARIO" Width="1.5" PointX="5.75" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FarmaciaModel.USUARIO" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
+      <Diagram DiagramId="af0728e462f24086b093430a63ae222e" Name="Diagram1" ZoomLevel="130">
+        <EntityTypeShape EntityType="FarmaciaModel.MEDICAMENTO" Width="2.75" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.PRESENTACION" Width="1.5" PointX="10.625" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.TIPOESPECIFICO" Width="2.5" PointX="8.625" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.TIPOFARMACO" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.TIPOMEDICAMENTO" Width="2" PointX="2.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.UNIDADMEDIDA" Width="1.5" PointX="0.625" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.TIPOSUSUARIO" Width="1.5" PointX="9.125" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.USUARIO" Width="1.5" PointX="11.625" PointY="7.25" IsExpanded="true" />
         <AssociationConnector Association="FarmaciaModel.fk_Presentacion" ManuallyRouted="false" />
         <AssociationConnector Association="FarmaciaModel.fk_tipoFarmaco" ManuallyRouted="false" />
         <AssociationConnector Association="FarmaciaModel.fk_TipoMedicamento" ManuallyRouted="false" />
-        <AssociationConnector Association="FarmaciaModel.fk_TipoEspecifico" ManuallyRouted="false" />
         <AssociationConnector Association="FarmaciaModel.fk_UnidadMedida" ManuallyRouted="false" />
         <AssociationConnector Association="FarmaciaModel.fk_TipoUsuario" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmaciaModel.fk_TipoEspecifico1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
