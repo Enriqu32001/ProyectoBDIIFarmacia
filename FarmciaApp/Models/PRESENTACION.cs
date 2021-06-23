@@ -17,13 +17,13 @@ namespace FarmciaApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRESENTACION()
         {
-            this.MEDICAMENTOes = new HashSet<MEDICAMENTO>();
+            this.MEDICAMENTO = new HashSet<MEDICAMENTO>();
         }
     
         public int id { get; set; }
         public string nombrePresentacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MEDICAMENTO> MEDICAMENTOes { get; set; }
+        public virtual ICollection<MEDICAMENTO> MEDICAMENTO { get; set; }
     }
 }

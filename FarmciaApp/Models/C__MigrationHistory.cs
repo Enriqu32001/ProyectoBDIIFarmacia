@@ -12,16 +12,11 @@ namespace FarmciaApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class USUARIO
+    public partial class C__MigrationHistory
     {
-        public int usuarioID { get; set; }
-        public string primerNombre { get; set; }
-        public string primerApellido { get; set; }
-        public string nombreUsuario { get; set; }
-        public string contraseña { get; set; }
-        public short tipoUsuario { get; set; }
-        public string email { get; set; }
-    
-        public virtual TIPOSUSUARIO TIPOSUSUARIO { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }

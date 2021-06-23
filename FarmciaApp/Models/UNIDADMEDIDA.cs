@@ -17,13 +17,13 @@ namespace FarmciaApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UNIDADMEDIDA()
         {
-            this.TIPOMEDICAMENTOes = new HashSet<TIPOMEDICAMENTO>();
+            this.TIPOMEDICAMENTO = new HashSet<TIPOMEDICAMENTO>();
         }
     
         public int id { get; set; }
         public string nombreUnidad { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TIPOMEDICAMENTO> TIPOMEDICAMENTOes { get; set; }
+        public virtual ICollection<TIPOMEDICAMENTO> TIPOMEDICAMENTO { get; set; }
     }
 }

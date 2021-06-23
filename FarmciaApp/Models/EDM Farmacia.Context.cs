@@ -15,10 +15,10 @@ namespace FarmciaApp.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class FarmaciaEntities : DbContext
+    public partial class FarmaciaEntities1 : DbContext
     {
-        public FarmaciaEntities()
-            : base("name=FarmaciaEntities")
+        public FarmaciaEntities1()
+            : base("name=FarmaciaEntities1")
         {
         }
     
@@ -27,14 +27,22 @@ namespace FarmciaApp.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<MEDICAMENTO> MEDICAMENTOes { get; set; }
-        public virtual DbSet<PRESENTACION> PRESENTACIONs { get; set; }
-        public virtual DbSet<TIPOESPECIFICO> TIPOESPECIFICOes { get; set; }
-        public virtual DbSet<TIPOFARMACO> TIPOFARMACOes { get; set; }
-        public virtual DbSet<TIPOMEDICAMENTO> TIPOMEDICAMENTOes { get; set; }
-        public virtual DbSet<UNIDADMEDIDA> UNIDADMEDIDAs { get; set; }
-        public virtual DbSet<TIPOSUSUARIO> TIPOSUSUARIOS { get; set; }
-        public virtual DbSet<USUARIO> USUARIOS { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<MEDICAMENTO> MEDICAMENTO { get; set; }
+        public virtual DbSet<PRESENTACION> PRESENTACION { get; set; }
+        public virtual DbSet<TIPOESPECIFICO> TIPOESPECIFICO { get; set; }
+        public virtual DbSet<TIPOFARMACO> TIPOFARMACO { get; set; }
+        public virtual DbSet<TIPOMEDICAMENTO> TIPOMEDICAMENTO { get; set; }
+        public virtual DbSet<UNIDADMEDIDA> UNIDADMEDIDA { get; set; }
+    
+        public virtual int checkStocks()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("checkStocks");
+        }
     
         public virtual ObjectResult<ObtenerTablaUsuariovalido_Result> ObtenerTablaUsuariovalido(string user, string pass)
         {

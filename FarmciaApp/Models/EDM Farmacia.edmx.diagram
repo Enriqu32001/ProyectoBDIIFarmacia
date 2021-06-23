@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="60c27bced9064d19869695e781cb7a0d" Name="Diagram1">
+        <EntityTypeShape EntityType="FarmaciaModel1.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel1.AspNetRoles" Width="1.5" PointX="5.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel1.AspNetUserClaims" Width="1.5" PointX="10.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel1.AspNetUserLogins" Width="1.5" PointX="10.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel1.AspNetUsers" Width="1.5" PointX="8" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel1.MEDICAMENTO" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel1.PRESENTACION" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel1.TIPOESPECIFICO" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel1.TIPOFARMACO" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel1.TIPOMEDICAMENTO" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel1.UNIDADMEDIDA" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="FarmaciaModel1.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmaciaModel1.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmaciaModel1.fk_Presentacion" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmaciaModel1.fk_TipoEspecifico" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmaciaModel1.fk_tipoFarmaco" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmaciaModel1.fk_TipoMedicamento" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmaciaModel1.fk_UnidadMedida" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmaciaModel1.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
