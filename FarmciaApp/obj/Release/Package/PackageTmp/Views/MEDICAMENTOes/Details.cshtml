@@ -1,0 +1,90 @@
+﻿@model FarmciaApp.Models.MEDICAMENTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MEDICAMENTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.indicaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.indicaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.existencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.existencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRESENTACION1.nombrePresentacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRESENTACION1.nombrePresentacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIPOESPECIFICO1.nombreTipEsp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPOESPECIFICO1.nombreTipEsp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIPOFARMACO1.nombreTipoFar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPOFARMACO1.nombreTipoFar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIPOMEDICAMENTO1.nombreTipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPOMEDICAMENTO1.nombreTipo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

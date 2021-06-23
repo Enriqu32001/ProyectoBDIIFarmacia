@@ -24,14 +24,28 @@
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                     <li>@Html.ActionLink("Sobre Nosotros", "About", "Home")</li>
                     <li>@Html.ActionLink("Contactos", "Contact", "Home")</li>
-                   
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Productos", "Index", "MEDICAMENTOes")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+
     <div class="container body-content">
-        @RenderBody()
+        @if (Request.IsAuthenticated)
+        {
+            @Html.Partial("Prueba1")
+            <p>Prueba</p>
+            @RenderBody()
+        }
+        else
+        {
+            @RenderBody()
+        }
+
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
@@ -41,5 +55,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

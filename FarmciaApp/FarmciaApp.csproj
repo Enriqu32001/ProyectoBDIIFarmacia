@@ -307,11 +307,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\USUARIOs\Create.cshtml" />
-    <Content Include="Views\USUARIOs\Delete.cshtml" />
-    <Content Include="Views\USUARIOs\Details.cshtml" />
-    <Content Include="Views\USUARIOs\Edit.cshtml" />
-    <Content Include="Views\USUARIOs\Index.cshtml" />
     <Content Include="Views\MEDICAMENTOes\Create.cshtml" />
     <Content Include="Views\MEDICAMENTOes\Delete.cshtml" />
     <Content Include="Views\MEDICAMENTOes\Details.cshtml" />
