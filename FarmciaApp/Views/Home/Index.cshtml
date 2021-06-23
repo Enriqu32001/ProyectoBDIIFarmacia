@@ -1,31 +1,58 @@
 ﻿@{
-    ViewBag.Title = "Menu";
+    ViewBag.Title = "Inicio";
 }
 
-<div class="jumbotron">
-    <h1>FitoFarma</h1>
-   
-    
+<div id="htmlcontent_home">
+    <a href="/Home/About" class="item-link" title="nature">
+        <img src="https://veigler.com/wp-content/uploads/2020/10/medicina-alternativa.jpg" align="middle" width="100%" height="100%">
+    </a>
+    <div class="item-html">
+        <a href="/Home/About" class="item-link" title="nature"></a>
+        <a href="/Home/About" class="btn2">FitoFarma</a>
+        <i class="icon-double-angle-right"></i>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            
-        </p>
+<br>
+<figure class="text-center">
+    <blockquote class="blockquote">
+        <p class="mb-0">Los mejores productos naturales</p>
 
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </blockquote>
+    <figcaption class="blockquote-footer">
+        Alguien por alli <cite title="Source Title"> de Ortiz</cite>
+    </figcaption>
+</figure>
+<br />
 
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+<div>
+    <div id="htmlcontent_home">
+        <ul class="htmlcontent-home clearfix row">
+            <li class="htmlcontent-item-1 col-xs-12"></li>
+            <li class="htmlcontent-item-1 col-xs-12">
+                @if (Request.IsAuthenticated)
+                {
+                    <a href="/MEDICAMENTOes" class="item-link" title="nature">
+                        <img src="https://assets.cdnelnuevodiario.com/news/dfc313aab43011e5bed50eb04a1bba78.jpg" class="item-img" title="nature" alt="nature" width="100%" height="100%">
+                    </a>
+                    <div class="item-html">
+                        <a href="/MEDICAMENTOes" class="item-link" title="nature"></a>
+                        <a href="/MEDICAMENTOes" class="btn">Ver productos</a>
+                        <i class="icon-double-angle-right"></i>
+                    </div>
+                }
+                else
+                {
+                    <a href="/Account/Login" class="item-link" title="nature">
+                        <img src="https://assets.cdnelnuevodiario.com/news/dfc313aab43011e5bed50eb04a1bba78.jpg" class="item-img" title="nature" alt="nature" width="100%" height="100%">
+                    </a>
+                    <div class="item-html">
+                        <a href="/Account/Login" class="item-link" title="nature"></a>
+                        <a href="/Account/Login" class="btn">Ver productos</a>
+                        <i class="icon-double-angle-right"></i>
+                    </div>
+                }
+            </li>
+        </ul>
     </div>
 </div>
